@@ -3,7 +3,7 @@
 <head>
 <meta name="google-site-verification" content="fI6VE2a41HjVNPJzio2iur_L8SaiEbpX48CRMR9H1PQ" />
   <meta charset="UTF-8" />
-  <title>??????</title>
+  <title>チェスゲーム</title>
   <style>
     body {
       font-family: sans-serif;
@@ -102,15 +102,15 @@
 </head>
 <body>
 
-<h1>??????</h1>
-<div id="status">?????</div>
+<h1>チェスゲーム</h1>
+<div id="status">白の番です</div>
 
 <div class="layout">
 
   <div class="ad">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8398161859137802"
      crossorigin="anonymous"></script>
-<!-- ??? -->
+<!-- チェス -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-8398161859137802"
@@ -127,7 +127,7 @@
   <div class="ad">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8398161859137802"
      crossorigin="anonymous"></script>
-<!-- ??? -->
+<!-- チェス -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-8398161859137802"
@@ -141,15 +141,15 @@
 
 </div>
 
-<button onclick="resetGame()">????</button>
+<button onclick="resetGame()">リセット</button>
 
 <script>
 const boardElement = document.getElementById("board");
 const statusElement = document.getElementById("status");
 
 const pieces = {
-  r: "?", n: "?", b: "?", q: "?", k: "?", p: "?",
-  R: "?", N: "?", B: "?", Q: "?", K: "?", P: "?"
+  r: "♜", n: "♞", b: "♝", q: "♛", k: "♚", p: "♟",
+  R: "♖", N: "♘", B: "♗", Q: "♕", K: "♔", P: "♙"
 };
 
 let board;
@@ -277,7 +277,7 @@ function makeMove(move) {
   board[move.toRow][move.toCol] = piece;
   board[move.fromRow][move.fromCol] = "";
 
-  // ?????
+  // ポーン昇格
   if (piece === "P" && move.toRow === 0) {
     board[move.toRow][move.toCol] = "Q";
   }
@@ -487,9 +487,9 @@ function checkGameState() {
     gameOver = true;
 
     if (turn === "white") {
-      statusElement.textContent = "??????????????";
+      statusElement.textContent = "チェックメイト！黒の勝ちです";
     } else {
-      statusElement.textContent = "??????????????";
+      statusElement.textContent = "チェックメイト！白の勝ちです";
     }
 
     return;
@@ -497,7 +497,7 @@ function checkGameState() {
 
   if (moves.length === 0 && !inCheck) {
     gameOver = true;
-    statusElement.textContent = "??????????????";
+    statusElement.textContent = "ステイルメイト！引き分けです";
     return;
   }
 
@@ -507,12 +507,12 @@ function checkGameState() {
 function updateStatus() {
   if (gameOver) return;
 
-  const checkText = isKingInCheck(turn) ? " ?????" : "";
+  const checkText = isKingInCheck(turn) ? " チェック！" : "";
 
   statusElement.textContent =
     turn === "white"
-      ? "?????" + checkText
-      : "?CPU????" + checkText;
+      ? "白の番です" + checkText
+      : "黒CPUの番です" + checkText;
 }
 
 function resetGame() {
